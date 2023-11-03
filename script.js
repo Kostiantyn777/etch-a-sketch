@@ -1,38 +1,35 @@
 const body = document.querySelector("body");
 
+const askButton = document.createElement("button");
+askButton.classList.add("ask-button");
+body.appendChild(askButton);
+
 const container = document.createElement("div");
 container.id = "container";
 body.appendChild(container);
 
-//Get viewport Height and Width
-const viewportHeight = window.innerHeight;
-const viewportWidth = window.innerWidth;
+askButton.addEventListener("click", removeAllSquares);
 
-let squareHeight = 16;
-let squareWidth = 16;
+function createGrid(rows, columns) {
+  // Calculate the width and height of the squares
+  let squareWidth = 660 / columns;
+  let squareHeight = 660 / rows;
 
-const numberOfRows = Math.floor(viewportHeight / squareHeight);
-const numberOfColumns = Math.floor(viewportWidth / squareWidth);
+  for (let row = 0; row < rows; row++) {
+    for (let column = 0; column < columns; column++) {
+      const squareItem = document.createElement("div");
+      squareItem.classList.add("square");
 
-// Calculate the adjusted squareWidth and squareHeight based on the number of columns and rows
-squareWidth = viewportWidth / numberOfColumns;
-squareHeight = viewportHeight / numberOfRows;
-console.log(squareWidth);
-console.log(squareHeight);
+      // Set the adjusted width and height for each square
+      squareItem.style.width = squareWidth + "px";
+      squareItem.style.height = squareHeight + "px";
 
-//Create the Grid
-for (let row = 0; row < numberOfRows; row++) {
-  for (let column = 0; column < numberOfColumns; column++) {
-    const squareItem = document.createElement("div");
-    squareItem.classList.add("square");
-
-    // Set the adjusted width and height for each square
-    squareItem.style.width = squareWidth + "px";
-    squareItem.style.height = squareHeight + "px";
-
-    container.appendChild(squareItem);
+      container.appendChild(squareItem);
+    }
   }
 }
+// Initial creation of the grid
+createGrid(16, 16);
 
 const getAllSquares = document.querySelectorAll(".square");
 
@@ -45,3 +42,9 @@ getAllSquares.forEach((item) => {
     item.style.backgroundColor = "#fff";
   });
 });
+
+function removeAllSquares() {
+  getAllSquares.forEach((square) => {
+    container.removeChild(square);
+  });
+}
