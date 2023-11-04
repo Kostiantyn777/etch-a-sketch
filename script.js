@@ -5,6 +5,11 @@ askButton.textContent = "Create New Grid";
 askButton.classList.add("ask-button");
 body.appendChild(askButton);
 
+const eraseButton = document.createElement("button");
+eraseButton.textContent = "Erase";
+eraseButton.classList.add("ask-button");
+body.appendChild(eraseButton);
+
 const container = document.createElement("div");
 container.id = "container";
 body.appendChild(container);
@@ -57,6 +62,11 @@ function removeAllSquares() {
     square.remove();
   });
 }
+function erasePixelatedTrail() {
+  squaresTosetPixelatedTrail.forEach((item) => {
+    item.style.backgroundColor = "black";
+  });
+}
 
 askButton.addEventListener("click", () => {
   let getAnswerFromUser = +prompt(
@@ -69,3 +79,5 @@ askButton.addEventListener("click", () => {
     setPixelatedTrailThroughGrid();
   }
 });
+
+eraseButton.addEventListener("click", erasePixelatedTrail);
