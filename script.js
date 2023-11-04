@@ -1,14 +1,18 @@
 const body = document.querySelector("body");
 
+const buttonContainer = document.createElement("div");
+buttonContainer.id = "button-container";
+body.appendChild(buttonContainer);
+
 const askButton = document.createElement("button");
 askButton.textContent = "Create New Grid";
 askButton.classList.add("ask-button");
-body.appendChild(askButton);
+buttonContainer.appendChild(askButton);
 
 const eraseButton = document.createElement("button");
 eraseButton.textContent = "Erase";
-eraseButton.classList.add("ask-button");
-body.appendChild(eraseButton);
+eraseButton.classList.add("erase-button");
+buttonContainer.appendChild(eraseButton);
 
 const container = document.createElement("div");
 container.id = "container";
