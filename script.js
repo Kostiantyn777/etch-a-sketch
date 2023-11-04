@@ -1,6 +1,7 @@
 const body = document.querySelector("body");
 
 const askButton = document.createElement("button");
+askButton.textContent = "Create New Grid";
 askButton.classList.add("ask-button");
 body.appendChild(askButton);
 
@@ -9,11 +10,12 @@ container.id = "container";
 body.appendChild(container);
 
 let getAllSquares = document.querySelectorAll(".square");
-console.log(getAllSquares);
+
+let squaresTosetPixelatedTrail = document.querySelectorAll(".square");
 
 function createGrid(rows, columns) {
   getAllSquares = document.querySelectorAll(".square");
-  console.log(getAllSquares);
+
   // Calculate the width and height of the squares
   let squareWidth = 660 / columns;
   let squareHeight = 660 / rows;
@@ -30,14 +32,16 @@ function createGrid(rows, columns) {
       container.appendChild(squareItem);
     }
   }
+  squaresTosetPixelatedTrail = document.querySelectorAll(".square");
 }
 
 // Initial creation of the grid
 createGrid(16, 16);
-
+// Add event listeners to squares
+setPixelatedTrailThroughGrid();
 
 function setPixelatedTrailThroughGrid() {
-  getAllSquares.forEach((item) => {
+  squaresTosetPixelatedTrail.forEach((item) => {
     item.addEventListener("mouseover", () => {
       item.style.backgroundColor = "green";
     });
@@ -48,11 +52,7 @@ function setPixelatedTrailThroughGrid() {
   });
 }
 
-// Add event listeners to squares
-setPixelatedTrailThroughGrid();
-
 function removeAllSquares() {
-  console.log(getAllSquares);
   getAllSquares.forEach((square) => {
     square.remove();
   });
@@ -66,6 +66,6 @@ askButton.addEventListener("click", () => {
   if (getAnswerFromUser >= 2 && getAnswerFromUser <= 100) {
     createGrid(getAnswerFromUser, getAnswerFromUser);
     removeAllSquares();
-    // setPixelatedTrailThroughGrid();
+    setPixelatedTrailThroughGrid();
   }
 });
